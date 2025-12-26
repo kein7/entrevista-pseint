@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0EA6120A-6311-428D-9FEC-3F3C93155262}|backend\\HelpDesk.Api\\HelpDesk.Api.csproj|c:\\users\\kevin\\desktop\\proyectos\\entrevistas\\psinet-entrevista\\backend\\helpdesk.api\\helpdesk.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0EA6120A-6311-428D-9FEC-3F3C93155262}|backend\\HelpDesk.Api\\HelpDesk.Api.csproj|solutionrelative:backend\\helpdesk.api\\helpdesk.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF785685-B552-4A84-9127-53F5BE70DA33}|backend\\HelpDesk.Application\\HelpDesk.Application.csproj|c:\\users\\kevin\\desktop\\proyectos\\entrevistas\\psinet-entrevista\\backend\\helpdesk.application\\helpdesk.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{FF785685-B552-4A84-9127-53F5BE70DA33}|backend\\HelpDesk.Application\\HelpDesk.Application.csproj|solutionrelative:backend\\helpdesk.application\\helpdesk.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7902BBFF-DA94-4672-9D33-4F2D47DF1788}|backend\\HelpDesk.Domain\\HelpDesk.Domain.csproj|c:\\users\\kevin\\desktop\\proyectos\\entrevistas\\psinet-entrevista\\backend\\helpdesk.domain\\helpdesk.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7902BBFF-DA94-4672-9D33-4F2D47DF1788}|backend\\HelpDesk.Domain\\HelpDesk.Domain.csproj|solutionrelative:backend\\helpdesk.domain\\helpdesk.domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CA99EF6-01DF-4151-9ED1-5D53417E3B1F}|backend\\HelpDesk.Infrastructure\\HelpDesk.Infrastructure.csproj|c:\\users\\kevin\\desktop\\proyectos\\entrevistas\\psinet-entrevista\\backend\\helpdesk.infrastructure\\helpdesk.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5CA99EF6-01DF-4151-9ED1-5D53417E3B1F}|backend\\HelpDesk.Infrastructure\\HelpDesk.Infrastructure.csproj|solutionrelative:backend\\helpdesk.infrastructure\\helpdesk.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HelpDesk.Api",
+              "DocumentMoniker": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Api\\HelpDesk.Api.csproj",
+              "RelativeDocumentMoniker": "backend\\HelpDesk.Api\\HelpDesk.Api.csproj",
+              "ToolTip": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Api\\HelpDesk.Api.csproj",
+              "RelativeToolTip": "backend\\HelpDesk.Api\\HelpDesk.Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-26T12:44:51.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HelpDesk.Infrastructure",
+              "DocumentMoniker": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Infrastructure\\HelpDesk.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "backend\\HelpDesk.Infrastructure\\HelpDesk.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Infrastructure\\HelpDesk.Infrastructure.csproj",
+              "RelativeToolTip": "backend\\HelpDesk.Infrastructure\\HelpDesk.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-26T12:44:29.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HelpDesk.Domain",
+              "DocumentMoniker": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Domain\\HelpDesk.Domain.csproj",
+              "RelativeDocumentMoniker": "backend\\HelpDesk.Domain\\HelpDesk.Domain.csproj",
+              "ToolTip": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Domain\\HelpDesk.Domain.csproj",
+              "RelativeToolTip": "backend\\HelpDesk.Domain\\HelpDesk.Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-26T12:44:23.282Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HelpDesk.Application",
+              "DocumentMoniker": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Application\\HelpDesk.Application.csproj",
+              "RelativeDocumentMoniker": "backend\\HelpDesk.Application\\HelpDesk.Application.csproj",
+              "ToolTip": "C:\\Users\\kevin\\Desktop\\Proyectos\\entrevistas\\psinet-entrevista\\backend\\HelpDesk.Application\\HelpDesk.Application.csproj",
+              "RelativeToolTip": "backend\\HelpDesk.Application\\HelpDesk.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-26T12:40:37.965Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
