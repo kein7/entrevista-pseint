@@ -22,8 +22,8 @@ namespace HelpDesk.Api.Controllers
         // GET: api/tickets (Listado y filtrado) 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets(
-            [FromQuery] Status? status,
-            [FromQuery] Priority? priority)
+            [FromQuery] Status? status = null,
+            [FromQuery] Priority? priority = null)
         {
             var query = _context.Tickets.AsQueryable();
 
