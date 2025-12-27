@@ -79,7 +79,10 @@
     font-weight: bold;
   }
   .user-name {
-    display: inline;
+    white-space: nowrap; /* Evita el salto de línea */
+    overflow: hidden; /* Opcional: por si el nombre es demasiado largo */
+    text-overflow: ellipsis; /* Opcional: agrega "..." si no cabe */
+    font-size: 0.9rem;
   }
 }
 

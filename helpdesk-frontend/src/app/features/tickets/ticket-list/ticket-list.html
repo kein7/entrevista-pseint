@@ -55,9 +55,8 @@
           </td>
           <td>
             <div class="user-info">
-              <span class="user-name"></span>
-              {{ ticket.assignedUser.substring(0, 1).toUpperCase() }}
-              {{ ticket.assignedUser.substring(1, 100) || 'Sin asignar' }}
+              <span class="user-name">{{ ticket.assignedUser || 'Sin asignar' | titlecase }}</span>
+
               <span class="avatar"></span>
             </div>
           </td>
