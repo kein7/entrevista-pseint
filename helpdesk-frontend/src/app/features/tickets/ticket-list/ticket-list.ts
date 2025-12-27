@@ -1,5 +1,7 @@
-import { Component, inject, OnInit, WritableSignal, signal, computed } from '@angular/core';
+import { Component, inject, effect, WritableSignal, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TicketService, Ticket } from '../../../core/services/ticket';
 import { AuthService } from '../../../core/services/auth';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -24,10 +26,15 @@ export class TicketList {
   currentPage = signal<number>(1);
   pageSize = 5;
 
+  searchTerm = signal<string>('');
+  private searchSubject = new Subject<string>();
+
   filterStatus = signal<string>('all');
   filterPriority = signal<string>('all');
 
   filteredTickets = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+
     return this.tickets().filter((ticket) => {
       const matchStatus =
         this.filterStatus() === 'all' || ticket.status?.toString() === this.filterStatus();
@@ -35,7 +42,9 @@ export class TicketList {
       const matchPriority =
         this.filterPriority() === 'all' || ticket.priority?.toString() === this.filterPriority();
 
-      return matchStatus && matchPriority;
+      const matchSearch = term === '' || ticket.title.toLowerCase().includes(term);
+
+      return matchStatus && matchPriority && matchSearch;
     });
   });
 
@@ -47,12 +56,34 @@ export class TicketList {
 
   totalPages = computed(() => Math.ceil(this.filteredTickets().length / this.pageSize));
 
+  constructor() {
+    this.searchSubject.pipe(debounceTime(500), distinctUntilChanged()).subscribe((value) => {
+      this.searchTerm.set(value);
+    });
+
+    effect(
+      () => {
+        // Cada vez que cualquiera de estas señales cambie, volvemos a la página 1
+        this.searchTerm();
+        this.filterStatus();
+        this.filterPriority();
+        this.resetPagination();
+      },
+      { allowSignalWrites: true }
+    );
+  }
+
   ngOnInit() {
     this.loadTickets();
   }
 
   openModal(ticket: Ticket) {
     this.selectedTicket.set(ticket);
+  }
+
+  onSearch(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchSubject.next(value);
   }
 
   // Método para formatear prioridades (Mejora el UX)

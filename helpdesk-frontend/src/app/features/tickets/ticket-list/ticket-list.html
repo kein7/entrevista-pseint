@@ -4,6 +4,16 @@
 
   <div class="table-responsive">
     <div class="filters-bar">
+      <div class="filter-group search-box">
+        <label for="search">Buscar incidencia:</label>
+        <input
+          id="search"
+          type="text"
+          placeholder="Buscar por título..."
+          (input)="onSearch($event)"
+          class="search-input"
+        />
+      </div>
       <div class="filter-group">
         <label>Estado:</label>
         <select (change)="filterStatus.set($any($event.target).value)">
