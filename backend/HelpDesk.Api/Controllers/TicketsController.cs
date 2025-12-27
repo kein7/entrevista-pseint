@@ -1,4 +1,5 @@
 ﻿using HelpDesk.Domain.Entities;
+using HelpDesk.Api.DTOs;
 using HelpDesk.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,61 @@ namespace HelpDesk.Api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTickets), new { id = ticket.Id }, ticket);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTicket(int id, [FromBody] TicketUpdateDto ticketDto)
+        {
+            // 1. Validar que el ID de la URL coincida con el objeto (Seguridad básica)
+
+            var existingTicket = await _context.Tickets.FindAsync(id);
+            if (existingTicket == null)
+            {
+                return NotFound(new { message = "El ticket no existe" });
+            }
+            if (!Enum.IsDefined(typeof(Priority), ticketDto.Priority))
+            {
+                return BadRequest("La prioridad proporcionada no es válida.");
+            }
+            if (!Enum.IsDefined(typeof(Status), ticketDto.Status))
+            {
+                return BadRequest("El estado proporcionado no es válido.");
+            }
+
+            // 2. Actualizar campos
+            existingTicket.Title = ticketDto.Title;
+            existingTicket.Description = ticketDto.Description;
+            existingTicket.Priority = (Priority)ticketDto.Priority;
+            existingTicket.Status = (Status)ticketDto.Status;
+            existingTicket.AssignedUser = ticketDto.AssignedUser;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(500, "Error de concurrencia al guardar");
+            }
+
+            return Ok(existingTicket); 
+        }
+
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] StatusUpdateDto statusDto)
+        {
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket == null) return NotFound();
+
+            if (!Enum.IsDefined(typeof(Status), statusDto.Status))
+            {
+                return BadRequest("El estado proporcionado no es válido.");
+            }
+
+            ticket.Status = (Status)statusDto.Status;
+            await _context.SaveChangesAsync();
+
+            return Ok(ticket);
         }
     }
 }
