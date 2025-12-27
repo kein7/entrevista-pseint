@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { TicketForm } from './ticket-form';
 
@@ -8,9 +11,13 @@ describe('TicketForm', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TicketForm]
-    })
-    .compileComponents();
+      imports: [TicketForm],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideZonelessChangeDetection(),
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TicketForm);
     component = fixture.componentInstance;
