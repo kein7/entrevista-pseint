@@ -2,14 +2,6 @@
   <section class="ticket-form-card">
     <h3>Crear Nuevo Ticket</h3>
 
-    @if (errorMessage()) {
-    <div class="alert-error">
-      <span class="icon">⚠️</span>
-      {{ errorMessage() }}
-      <button class="close-btn" (click)="errorMessage.set(null)">×</button>
-    </div>
-    }
-
     <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
       <div class="form-grid">
         <div class="field">
@@ -53,6 +45,13 @@
       <button type="submit" [disabled]="ticketForm.invalid || isLoading()">
         {{ isLoading() ? 'Guardando...' : '➕ Crear Ticket' }}
       </button>
+      @if (errorMessage()) {
+      <div class="alert-error">
+        <span class="icon">⚠️</span>
+        {{ errorMessage() }}
+        <button class="close-btn" (click)="errorMessage.set(null)">×</button>
+      </div>
+      }
     </form>
   </section>
 </div>

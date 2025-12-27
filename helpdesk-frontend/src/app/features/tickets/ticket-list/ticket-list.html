@@ -2,8 +2,6 @@
 <div class="container">
   <app-ticket-form (ticketCreated)="onTicketCreated($event)" />
 
-  <hr class="separator" />
-
   <div class="table-responsive">
     <div class="filters-bar">
       <div class="filter-group">
@@ -56,18 +54,16 @@
           <td>
             <div class="user-info">
               <span class="user-name">{{ ticket.assignedUser || 'Sin asignar' | titlecase }}</span>
-
-              <span class="avatar"></span>
             </div>
           </td>
           <td>
             <span [class]="'status-tag ' + (ticket.status === 0 ? 'open' : 'closed')">
               {{
                 ticket.status === 0
-                  ? '● Abierto'
+                  ? '● Nuevo'
                   : ticket.status === 1
                   ? '● En progreso'
-                  : '○ Cerrado'
+                  : '○ Resuelto'
               }}
             </span>
           </td>

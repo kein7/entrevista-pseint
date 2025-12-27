@@ -27,9 +27,9 @@
         <div class="form-group">
           <label>Estado</label>
           <select formControlName="status">
-            <option [value]="0">Abierto</option>
+            <option [value]="0">Nuevo</option>
             <option [value]="1">En progreso</option>
-            <option [value]="2">Cerrado</option>
+            <option [value]="2">Resuelto</option>
           </select>
         </div>
         @if (isInvalid('status')) {

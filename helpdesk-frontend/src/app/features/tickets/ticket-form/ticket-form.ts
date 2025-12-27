@@ -53,7 +53,7 @@ export class TicketForm {
       error: (err) => {
         this.isLoading.set(false);
         if (err.status === 400) {
-          this.errorMessage.set('Revisa los campos obligatorios.');
+          this.errorMessage.set('Revisa los campos. Puede que hayas escrito poco 😅');
         } else {
           this.errorMessage.set('Ocurrió un error inesperado al conectar con el servidor.');
         }
