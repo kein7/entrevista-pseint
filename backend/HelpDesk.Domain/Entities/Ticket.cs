@@ -14,7 +14,7 @@ namespace HelpDesk.Domain.Entities
         public Priority Priority { get; set; }
         public Status Status { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public string? AssignedUser { get; set; }
+        public string AssignedUser { get; set; }
     }
 
     public enum Priority
