@@ -1,0 +1,14 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Detalle del Ticket #{{ ticket().id }}</h2>
+    <form [formGroup]="editForm" (ngSubmit)="save()">
+      <input formControlName="title" placeholder="Título" />
+      <textarea formControlName="description"></textarea>
+
+      <div class="actions">
+        <button type="button" (click)="close.emit()">Cancelar</button>
+        <button type="submit" class="btn-save">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</div>

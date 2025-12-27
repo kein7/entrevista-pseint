@@ -9,7 +9,7 @@ export interface Ticket {
   description: string;
   status?: number; // 0: Abierto, 1: Cerrado (o según tu lógica)
   priority: number; // 0: Baja, 1: Media, 2: Alta
-  assignedTo?: string;
+  assignedUser: string;
   createdAt?: string;
 }
 
@@ -24,5 +24,14 @@ export class TicketService {
 
   createTicket(ticket: Ticket): Observable<Ticket> {
     return this.http.post<Ticket>(this.API_URL, ticket);
+  }
+
+  updateTicketStatus(id: number, status: number): Observable<Ticket> {
+    return this.http.patch<Ticket>(`${this.API_URL}/${id}/status`, { status });
+  }
+
+  // Para la edición completa
+  updateTicket(id: number, ticket: Ticket): Observable<Ticket> {
+    return this.http.put<Ticket>(`${this.API_URL}/${id}`, ticket);
   }
 }

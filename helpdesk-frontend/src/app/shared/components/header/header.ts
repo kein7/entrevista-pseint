@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class HeaderComponent {
+export class Header {
   private authService = inject(AuthService);
 
   // Obtenemos el nombre del usuario guardado en el login
