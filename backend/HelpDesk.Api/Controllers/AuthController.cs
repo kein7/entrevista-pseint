@@ -31,18 +31,22 @@ public class AuthController : ControllerBase
 
     private string GenerateJwtToken(string username)
     {
+        // 1. Leer todo desde Environment (prioridad) o Config
         var key = Environment.GetEnvironmentVariable("JWT_KEY") ?? _config["Jwt:Key"];
+        var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? _config["Jwt:Issuer"];
+        var audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? _config["Jwt:Audience"];
+
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new[] {
-            new Claim(ClaimTypes.Name, username),
-            new Claim(ClaimTypes.Role, "Admin")
-        };
+        new Claim(ClaimTypes.Name, username),
+        new Claim(ClaimTypes.Role, "Admin")
+    };
 
         var token = new JwtSecurityToken(
-            issuer: _config["Jwt:Issuer"],
-            audience: _config["Jwt:Audience"],
+            issuer: issuer,  
+            audience: audience, 
             claims: claims,
             expires: DateTime.Now.AddHours(3),
             signingCredentials: credentials);
