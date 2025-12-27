@@ -2,6 +2,8 @@
 
 ## 0. Comandos claves
 
+### 0.1 Comandos en ambiente local
+
 - **Backend:**
   - `dotnet restore`
   - `dotnet ef database update`
@@ -12,6 +14,12 @@
 - **Tests:**
   - `dotnet test` (Backend)
   - `ng test` (Frontend)
+
+### 0.2 Comando en ambiente docker
+
+Ejecutar `docker-compose up --build` en la carpeta raiz del monorepo
+
+_Nota_: En el enviroment.ts en frontend deje apuntando al localhost pero en un ambiente de produccion real debe apuntar a la url de la api.
 
 ## 1. Requisitos previos
 
