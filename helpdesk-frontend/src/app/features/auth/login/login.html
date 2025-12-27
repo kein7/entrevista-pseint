@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2>HelpDesk Login</h2>
+
+    @if (errorMessage()) {
+    <div class="alert error">{{ errorMessage() }}</div>
+    }
+
+    <div class="form-group">
+      <label>Usuario</label>
+      <input type="text" formControlName="username" placeholder="admin" />
+      @if (loginForm.get('username')?.touched && loginForm.get('username')?.invalid) {
+      <small class="error-text">El usuario es requerido</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" formControlName="password" placeholder="123456" />
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+      <small class="error-text">La contraseña debe tener al menos 6 caracteres</small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid || isLoading()">
+      {{ isLoading() ? 'Cargando...' : 'Entrar' }}
+    </button>
+  </form>
+</div>
