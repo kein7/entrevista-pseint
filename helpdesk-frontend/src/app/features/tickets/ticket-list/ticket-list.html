@@ -63,7 +63,13 @@
           </td>
           <td>
             <span [class]="'status-tag ' + (ticket.status === 0 ? 'open' : 'closed')">
-              {{ ticket.status === 0 ? '● Abierto' : '○ Cerrado' }}
+              {{
+                ticket.status === 0
+                  ? '● Abierto'
+                  : ticket.status === 1
+                  ? '● En progreso'
+                  : '○ Cerrado'
+              }}
             </span>
           </td>
           <td>{{ ticket.createdAt | date : 'dd/MM/yyyy HH:mm' }}</td>

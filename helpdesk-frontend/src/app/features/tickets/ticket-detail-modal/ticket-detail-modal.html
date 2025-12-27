@@ -28,7 +28,8 @@
           <label>Estado</label>
           <select formControlName="status">
             <option [value]="0">Abierto</option>
-            <option [value]="1">Cerrado</option>
+            <option [value]="1">En progreso</option>
+            <option [value]="2">Cerrado</option>
           </select>
         </div>
         @if (isInvalid('status')) {
