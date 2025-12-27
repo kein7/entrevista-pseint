@@ -13,13 +13,16 @@ import { TicketDetailModal } from '../ticket-detail-modal/ticket-detail-modal';
   templateUrl: './ticket-list.html',
   styleUrl: './ticket-list.scss',
 })
-export class TicketList implements OnInit {
+export class TicketList {
   private ticketService = inject(TicketService);
   authService = inject(AuthService);
 
   tickets: WritableSignal<Ticket[]> = signal<Ticket[]>([]);
 
   selectedTicket = signal<Ticket | null>(null);
+
+  currentPage = signal<number>(1);
+  pageSize = 5;
 
   filterStatus = signal<string>('all');
   filterPriority = signal<string>('all');
@@ -36,6 +39,14 @@ export class TicketList implements OnInit {
     });
   });
 
+  paginatedTickets = computed(() => {
+    const startIndex = (this.currentPage() - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.filteredTickets().slice(startIndex, endIndex);
+  });
+
+  totalPages = computed(() => Math.ceil(this.filteredTickets().length / this.pageSize));
+
   ngOnInit() {
     this.loadTickets();
   }
@@ -48,6 +59,16 @@ export class TicketList implements OnInit {
   getPriorityLabel(priority: number): string {
     const labels = ['Baja', 'Media', 'Alta'];
     return labels[priority] || 'Desconocida';
+  }
+
+  goToPage(page: number) {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage.set(page);
+    }
+  }
+
+  resetPagination() {
+    this.currentPage.set(1);
   }
 
   loadTickets() {

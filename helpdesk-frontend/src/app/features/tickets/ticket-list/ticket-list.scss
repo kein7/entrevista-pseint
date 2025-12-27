@@ -121,3 +121,39 @@
     color: #94a3b8;
   }
 }
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 10px;
+
+  button {
+    padding: 8px 16px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:disabled {
+      background: #f1f5f9;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+  }
+
+  .page-info {
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.9rem;
+  }
+}

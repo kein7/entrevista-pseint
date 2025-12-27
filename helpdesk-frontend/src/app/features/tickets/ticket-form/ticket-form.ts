@@ -18,11 +18,16 @@ export class TicketForm {
   errorMessage = signal<string | null>(null);
 
   ticketForm = this.fb.group({
-    title: ['', [Validators.required, Validators.minLength(5)]],
+    title: ['', [Validators.required]],
     description: ['', [Validators.required]],
     priority: [1, [Validators.required]],
     assignedUser: ['admin', [Validators.required]],
   });
+
+  isInvalid(field: string): boolean {
+    const control = this.ticketForm.get(field);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
 
   onSubmit() {
     if (this.ticketForm.invalid) return;

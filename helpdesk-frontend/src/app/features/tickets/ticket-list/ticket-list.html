@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (ticket of filteredTickets(); track ticket.id) {
+        @for (ticket of paginatedTickets(); track ticket.id) {
         <tr>
           <td>#{{ ticket.id }}</td>
           <td>
@@ -90,6 +90,17 @@
       <p>No se encontraron tickets registrados.</p>
     </div>
     }
+    <div class="pagination-controls">
+      <button [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)">
+        Anterior
+      </button>
+
+      <span class="page-info"> Página {{ currentPage() }} de {{ totalPages() || 1 }} </span>
+
+      <button [disabled]="currentPage() >= totalPages()" (click)="goToPage(currentPage() + 1)">
+        Siguiente
+      </button>
+    </div>
   </div>
 </div>
 
