@@ -1,6 +1,15 @@
 <div class="container">
   <section class="ticket-form-card">
     <h3>Crear Nuevo Ticket</h3>
+
+    @if (errorMessage()) {
+    <div class="alert-error">
+      <span class="icon">⚠️</span>
+      {{ errorMessage() }}
+      <button class="close-btn" (click)="errorMessage.set(null)">×</button>
+    </div>
+    }
+
     <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
       <div class="form-grid">
         <div class="field">
@@ -12,6 +21,15 @@
             <option [value]="0">Baja</option>
             <option [value]="1">Media</option>
             <option [value]="2">Alta</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Asignar a:</label>
+          <select formControlName="assignedUser">
+            <option value="admin">Administrador</option>
+            <option value="soporte_01">Soporte Técnico N1</option>
+            <option value="soporte_02">Soporte Técnico N2</option>
           </select>
         </div>
 
