@@ -1,0 +1,62 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+
+    th,
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+      color: #333;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  }
+}
+
+// Badges de prioridad
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+
+  &.priority-0 {
+    background: #e1f5fe;
+    color: #0288d1;
+  } // Baja
+  &.priority-1 {
+    background: #fff3e0;
+    color: #f57c00;
+  } // Media
+  &.priority-2 {
+    background: #ffebee;
+    color: #d32f2f;
+  } // Alta
+}
+
+.status-tag {
+  font-weight: 500;
+  &.open {
+    color: #2e7d32;
+  }
+  &.closed {
+    color: #757575;
+  }
+}

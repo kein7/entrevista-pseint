@@ -1,1 +1,52 @@
-<p>ticket-list works!</p>
+@if (authService.isLoggedIn()) {
+
+<div class="container">
+  <app-ticket-form (ticketCreated)="onTicketCreated($event)" />
+
+  <hr class="separator" />
+
+  <div class="table-responsive">
+    @if (tickets().length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Prioridad</th>
+          <th>Estado</th>
+          <th>Fecha Creación</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (ticket of tickets(); track ticket.id) {
+        <tr>
+          <td>#{{ ticket.id }}</td>
+          <td>
+            <strong>{{ ticket.title }}</strong>
+          </td>
+          <td>
+            <span [class]="'badge priority-' + ticket.priority">
+              {{ getPriorityLabel(ticket.priority) }}
+            </span>
+          </td>
+          <td>
+            <span [class]="'status-tag ' + (ticket.status === 0 ? 'open' : 'closed')">
+              {{ ticket.status === 0 ? '● Abierto' : '○ Cerrado' }}
+            </span>
+          </td>
+          <td>{{ ticket.createdAt | date : 'dd/MM/yyyy HH:mm' }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    } @else {
+    <div class="empty-state">
+      <p>No se encontraron tickets registrados.</p>
+    </div>
+    }
+  </div>
+</div>
+
+} @else {
+<p>Verificando acceso...</p>
+}

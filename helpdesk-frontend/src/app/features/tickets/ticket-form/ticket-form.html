@@ -1,0 +1,28 @@
+<div class="container">
+  <section class="ticket-form-card">
+    <h3>Crear Nuevo Ticket</h3>
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="field">
+          <input type="text" formControlName="title" placeholder="Título del problema" />
+        </div>
+
+        <div class="field">
+          <select formControlName="priority">
+            <option [value]="0">Baja</option>
+            <option [value]="1">Media</option>
+            <option [value]="2">Alta</option>
+          </select>
+        </div>
+
+        <div class="field full-width">
+          <textarea formControlName="description" placeholder="Descripción detallada..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="ticketForm.invalid || isLoading()">
+        {{ isLoading() ? 'Guardando...' : '➕ Crear Ticket' }}
+      </button>
+    </form>
+  </section>
+</div>
