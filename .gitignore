@@ -5,6 +5,7 @@
 
 # dotenv files
 .env
+*.env
 
 # User-specific files
 *.rsuser
@@ -271,6 +272,11 @@ ServiceFabricBackup/
 *.mdf
 *.ldf
 *.ndf
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
 
 # Business Intelligence projects
 *.rdl.data

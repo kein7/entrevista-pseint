@@ -1,0 +1,72 @@
+<div class="modal-backdrop" (click)="close.emit()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Editar Ticket #{{ ticket().id }}</h2>
+
+    <form [formGroup]="editForm" (ngSubmit)="save()">
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" formControlName="title" />
+        @if (isInvalid('title')) {
+        <span class="error-msg">El título es obligatorio (mín. 5 caracteres)</span>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prioridad</label>
+          <select formControlName="priority">
+            <option [value]="0">Baja</option>
+            <option [value]="1">Media</option>
+            <option [value]="2">Alta</option>
+          </select>
+          @if (isInvalid('priority')) {
+          <span class="error-msg">La prioridad es obligatoria</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label>Estado</label>
+          <select formControlName="status">
+            <option [value]="0">Nuevo</option>
+            <option [value]="1">En progreso</option>
+            <option [value]="2">Resuelto</option>
+          </select>
+        </div>
+        @if (isInvalid('status')) {
+        <span class="error-msg">El estatus es obligatorio</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Asignado a</label>
+        <input type="text" formControlName="assignedUser" />
+        @if (isInvalid('assignedUser')) {
+        <span class="error-msg">La persona asignada es obligatorio</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea formControlName="description" rows="4"></textarea>
+        @if (isInvalid('description')) {
+        <span class="error-msg">La descripción es obligatoria</span>
+        }
+      </div>
+
+      @if (errorMessage()) {
+      <div class="alert-error">
+        <span class="icon">⚠️</span>
+        {{ errorMessage() }}
+        <button class="close-btn" (click)="errorMessage.set(null)">×</button>
+      </div>
+      }
+
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" (click)="close.emit()">Cancelar</button>
+        <button type="submit" class="btn-save" [disabled]="editForm.invalid || isLoading()">
+          Guardar Cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

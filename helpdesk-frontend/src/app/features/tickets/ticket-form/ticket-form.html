@@ -1,0 +1,57 @@
+<div class="container">
+  <section class="ticket-form-card">
+    <h3>Crear Nuevo Ticket</h3>
+
+    <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="field">
+          <input type="text" formControlName="title" placeholder="Título del problema" />
+          @if (isInvalid('title')) {
+          <span class="error-msg">El título es obligatorio (mín. 5 caracteres)</span>
+          }
+        </div>
+
+        <div class="field">
+          <select formControlName="priority">
+            <option [value]="0">Baja</option>
+            <option [value]="1">Media</option>
+            <option [value]="2">Alta</option>
+          </select>
+          @if (isInvalid('priority')) {
+          <span class="error-msg">La prioridad es obligatoria</span>
+          }
+        </div>
+
+        <div class="field">
+          <label>Asignar a:</label>
+          <select formControlName="assignedUser">
+            <option value="admin">Administrador</option>
+            <option value="soporte_01">Soporte Técnico N1</option>
+            <option value="soporte_02">Soporte Técnico N2</option>
+          </select>
+          @if (isInvalid('assignedUser')) {
+          <span class="error-msg">La persona asignada es obligatorio</span>
+          }
+        </div>
+
+        <div class="field full-width">
+          <textarea formControlName="description" placeholder="Descripción detallada..."></textarea>
+          @if (isInvalid('description')) {
+          <span class="error-msg">La descripción es obligatoria</span>
+          }
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="ticketForm.invalid || isLoading()">
+        {{ isLoading() ? 'Guardando...' : '➕ Crear Ticket' }}
+      </button>
+      @if (errorMessage()) {
+      <div class="alert-error">
+        <span class="icon">⚠️</span>
+        {{ errorMessage() }}
+        <button class="close-btn" (click)="errorMessage.set(null)">×</button>
+      </div>
+      }
+    </form>
+  </section>
+</div>

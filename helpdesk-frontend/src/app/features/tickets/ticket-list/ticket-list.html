@@ -1,0 +1,120 @@
+@if (authService.isLoggedIn()) {
+<div class="container">
+  <app-ticket-form (ticketCreated)="onTicketCreated($event)" />
+
+  <div class="table-responsive">
+    <div class="filters-bar">
+      <div class="filter-group search-box">
+        <label for="search">Buscar incidencia:</label>
+        <input
+          id="search"
+          type="text"
+          placeholder="Buscar por título..."
+          (input)="onSearch($event)"
+          class="search-input"
+        />
+      </div>
+      <div class="filter-group">
+        <label>Estado:</label>
+        <select (change)="filterStatus.set($any($event.target).value)">
+          <option value="all">Todos</option>
+          <option value="0">Abiertos</option>
+          <option value="1">Cerrados</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Prioridad:</label>
+        <select (change)="filterPriority.set($any($event.target).value)">
+          <option value="all">Todas</option>
+          <option value="0">Baja</option>
+          <option value="1">Media</option>
+          <option value="2">Alta</option>
+        </select>
+      </div>
+
+      <span class="results-count">
+        Mostrando {{ filteredTickets().length }} de {{ tickets().length }}
+      </span>
+    </div>
+    @if (tickets().length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Prioridad</th>
+          <th>Responsable</th>
+          <th>Estado</th>
+          <th>Fecha Creación</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (ticket of paginatedTickets(); track ticket.id) {
+        <tr>
+          <td>#{{ ticket.id }}</td>
+          <td>
+            <strong>{{ ticket.title }}</strong>
+          </td>
+          <td>
+            <span [class]="'badge priority-' + ticket.priority">
+              {{ getPriorityLabel(ticket.priority) }}
+            </span>
+          </td>
+          <td>
+            <div class="user-info">
+              <span class="user-name">{{ ticket.assignedUser || 'Sin asignar' | titlecase }}</span>
+            </div>
+          </td>
+          <td>
+            <span [class]="'status-tag ' + (ticket.status === 0 ? 'open' : 'closed')">
+              {{
+                ticket.status === 0
+                  ? '● Nuevo'
+                  : ticket.status === 1
+                  ? '● En progreso'
+                  : '○ Resuelto'
+              }}
+            </span>
+          </td>
+          <td>{{ ticket.createdAt | date : 'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <button class="btn-view" (click)="openModal(ticket)">👁️ Ver más</button>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="5">No hay tickets que coincidan con los filtros.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (selectedTicket()) {
+    <app-ticket-detail-modal
+      [ticket]="selectedTicket()!"
+      (close)="selectedTicket.set(null)"
+      (updated)="onTicketUpdated($event)"
+    />
+    } } @else {
+    <div class="empty-state">
+      <p>No se encontraron tickets registrados.</p>
+    </div>
+    }
+    <div class="pagination-controls">
+      <button [disabled]="currentPage() === 1" (click)="goToPage(currentPage() - 1)">
+        Anterior
+      </button>
+
+      <span class="page-info"> Página {{ currentPage() }} de {{ totalPages() || 1 }} </span>
+
+      <button [disabled]="currentPage() >= totalPages()" (click)="goToPage(currentPage() + 1)">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>
+
+} @else {
+<p>Verificando acceso...</p>
+}
