@@ -4,9 +4,13 @@ using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FluentValidation;
+using HelpDesk.Application.Validators;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTicketValidator>();
 // Configurar Serilog
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()

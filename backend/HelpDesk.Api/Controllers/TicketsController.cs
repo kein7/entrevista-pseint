@@ -1,9 +1,12 @@
-﻿using HelpDesk.Domain.Entities;
+﻿using FluentValidation;
 using HelpDesk.Api.DTOs;
+using HelpDesk.Domain.Entities;
 using HelpDesk.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Sockets;
 
 namespace HelpDesk.Api.Controllers
 {
@@ -12,10 +15,12 @@ namespace HelpDesk.Api.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
+        private readonly IValidator<Ticket> _validator;
         private readonly AppDbContext _context;
 
-        public TicketsController(AppDbContext context)
+        public TicketsController(IValidator<Ticket> validator, AppDbContext context)
         {
+            _validator = validator;
             _context = context;
         }
 
@@ -25,6 +30,7 @@ namespace HelpDesk.Api.Controllers
             [FromQuery] Status? status = null,
             [FromQuery] Priority? priority = null)
         {
+           
             var query = _context.Tickets.AsQueryable();
 
             if (status.HasValue) query = query.Where(t => t.Status == status);
@@ -37,6 +43,17 @@ namespace HelpDesk.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Ticket>> CreateTicket(Ticket ticket)
         {
+            var validationResult = await _validator.ValidateAsync(ticket);
+
+            if (!validationResult.IsValid)
+            {
+                // Devuelve los errores formateados para que Angular los muestre 
+                return BadRequest(validationResult.Errors.Select(e => new {
+                    Property = e.PropertyName,
+                    Message = e.ErrorMessage
+                }));
+            }
+
             ticket.CreatedAt = DateTime.UtcNow; 
             ticket.Status = Status.New; // Forzamos estado inicial 
 
@@ -71,6 +88,9 @@ namespace HelpDesk.Api.Controllers
             existingTicket.Priority = (Priority)ticketDto.Priority;
             existingTicket.Status = (Status)ticketDto.Status;
             existingTicket.AssignedUser = ticketDto.AssignedUser;
+
+            var validationResult = await _validator.ValidateAsync(existingTicket);
+            if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
 
             try
             {

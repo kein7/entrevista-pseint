@@ -25,6 +25,7 @@ public class CreateTicketValidator : AbstractValidator<Ticket>
 
         // Validación de Prioridad 
         RuleFor(x => x.Priority)
+            .NotEmpty().WithMessage("La prioridad es requerida.")
             .IsInEnum().WithMessage("La prioridad seleccionada no es válida.");
 
         // Validación de Estado 
@@ -33,6 +34,7 @@ public class CreateTicketValidator : AbstractValidator<Ticket>
 
         // Validación de Usuario Asignado [cite: 15]
         RuleFor(x => x.AssignedUser)
+            .NotEmpty().WithMessage("El usuario es requerido.")
             .MaximumLength(50).WithMessage("El nombre del usuario asignado es demasiado largo.");
     }
 }
