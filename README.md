@@ -1,4 +1,4 @@
-# Readme - PSINet
+# Readme
 
 ## 0. Comandos claves
 
